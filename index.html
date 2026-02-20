@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Nostro Matrimonio</title>
+    <title>Il Nostro Matrimonio - Sara & Stefano</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,179 +16,491 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            overflow: hidden;
-            height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Schermata di apertura */
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Splash screen */
         .splash-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-                        url('https://raw.githubusercontent.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/main/images/AGEI.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80') center/cover no-repeat;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: center;
-            padding-bottom: 100px;
-            cursor: pointer;
-            transition: opacity 1s ease;
-            z-index: 1000;
+            z-index: 9999;
+            transition: opacity 1.5s ease, transform 1.5s ease;
         }
 
         .splash-screen.hidden {
             opacity: 0;
             pointer-events: none;
+            transform: translateY(-30px);
         }
 
-        /* Barra di sblocco */
+        .splash-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 700px;
+        }
+
+        .splash-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .splash-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .unlock-container {
+            margin-top: 2rem;
+        }
+
         .unlock-bar {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 15px 40px;
-            display: flex;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 60px;
+            padding: 18px 45px;
+            display: inline-flex;
             align-items: center;
             gap: 15px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s infinite;
-            transition: transform 0.3s ease;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         .unlock-bar:hover {
-            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
         }
 
-        .unlock-bar span {
-            font-size: 1.2rem;
-            color: #333;
-            font-style: italic;
+        .unlock-text {
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .arrow-icon {
-            font-size: 1.5rem;
-            animation: slide 1.5s infinite;
+            font-size: 1.8rem;
+            animation: float 2s infinite ease-in-out;
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); }
-            50% { box-shadow: 0 4px 40px rgba(255, 255, 255, 0.4); }
+        .swipe-hint {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
-        @keyframes slide {
-            0%, 100% { transform: translateX(0); opacity: 0.5; }
-            50% { transform: translateX(10px); opacity: 1; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
         }
 
-        /* Contenuto principale (seconda pagina) */
+        /* Main content */
         .main-content {
             opacity: 0;
             transition: opacity 1s ease;
-            height: 100vh;
-            background: #fdf6f0;
-            padding: 40px;
-            text-align: center;
-            overflow-y: auto;
         }
 
         .main-content.visible {
             opacity: 1;
         }
 
-        .main-content h1 {
-            font-size: 3rem;
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #fdf6f0 0%, #f8e9d9 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: 5rem;
             color: #8b4513;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
+            line-height: 1.1;
         }
 
-        .main-content p {
-            font-size: 1.3rem;
-            color: #555;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.8;
+        .hero-date {
+            font-size: 2rem;
+            color: #b8860b;
+            margin-bottom: 3rem;
         }
 
-        .details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+        .hero-floral {
+            position: absolute;
+            width: 300px;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-floral-1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(-15deg);
+        }
+
+        .hero-floral-2 {
+            bottom: 10%;
+            right: 5%;
+            transform: rotate(15deg);
+        }
+
+        /* Countdown */
+        .countdown-container {
+            background: #8b4513;
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .countdown-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .countdown-box {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
             max-width: 900px;
-            margin: 40px auto;
+            margin: 0 auto;
+        }
+
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            min-width: 150px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .countdown-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Details section */
+        .details-section {
+            padding: 5rem 2rem;
+            background: #fdf6f0;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #8b4513;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .detail-card {
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(139, 69, 19, 0.1);
         }
 
-        .detail-card h3 {
+        .detail-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .detail-icon {
+            font-size: 3rem;
+            color: #b8860b;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-title {
+            font-size: 1.8rem;
             color: #8b4513;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
         }
 
-        /* Media query per mobile */
+        .detail-text {
+            font-size: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* RSVP section */
+        .rsvp-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #8b4513 0%, #b8860b 100%);
+            color: white;
+        }
+
+        .rsvp-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .btn-submit {
+            background: white;
+            color: #8b4513;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+        }
+
+        .btn-submit:hover {
+            background: #f8e9d9;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-hearts {
+            color: #ff6b6b;
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .unlock-bar {
-                padding: 12px 30px;
+            .splash-title {
+                font-size: 2.5rem;
             }
-            .unlock-bar span {
-                font-size: 1rem;
+            .splash-subtitle {
+                font-size: 1.2rem;
             }
-            .main-content h1 {
-                font-size: 2rem;
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-date {
+                font-size: 1.5rem;
+            }
+            .countdown-item {
+                min-width: 120px;
+                padding: 1.5rem;
+            }
+            .countdown-number {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            .detail-card {
+                padding: 2rem;
             }
         }
     </style>
 </head>
 <body>
-
-    <!-- Schermata di apertura -->
+    <!-- Splash Screen -->
     <div class="splash-screen" id="splash">
-        <div class="unlock-bar">
-            <span>Scorri qui per scoprire</span>
-            <span class="arrow-icon">➜</span>
+        <div class="splash-content">
+            <h1 class="splash-title font-dancing">Sara & Stefano</h1>
+            <p class="splash-subtitle">Vi invitano a celebrare il loro amore</p>
+            <div class="unlock-container">
+                <div class="unlock-bar" id="unlockBar">
+                    <span class="unlock-text">Scorri o clicca per scoprire</span>
+                    <span class="arrow-icon">➜</span>
+                </div>
+                <p class="swipe-hint">(Trascina verso l'alto come su uno smartphone)</p>
+            </div>
         </div>
     </div>
 
-    <!-- Contenuto principale -->
+    <!-- Main Content -->
     <div class="main-content" id="mainContent">
-        <h1>👰‍♀️ Sara & 🤵‍♂️ Stefano 👰‍♀️</h1>
-        <p>Con gioia vi invitiamo a celebrare il nostro matrimonio</p>
-        
-        <div class="details">
-            <div class="detail-card">
-                <h3>📅 Data</h3>
-                <p>15 Giugno 2025</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <img src="https://cdn-icons-png.flaticon.com/512/1998/1998678.png" alt="Floral" class="hero-floral hero-floral-1">
+            <img src="https://cdn-icons-png.flaticon.com/512/1998/1998678.png" alt="Floral" class="hero-floral hero-floral-2">
+            <div class="hero-content">
+                <h1 class="hero-title font-dancing">Sara & Stefano</h1>
+                <p class="hero-date font-playfair">15 Giugno 2025</p>
+                <p class="text-xl text-gray-700 max-w-2xl mx-auto mt-6">Con gioia nel cuore, vi invitiamo a condividere con noi il giorno più bello della nostra vita.</p>
             </div>
-            <div class="detail-card">
-                <h3>⛪ Cerimonia</h3>
-                <p>Chiesa di San Pietro<br>Ore 15:00</p>
+        </section>
+
+        <!-- Countdown -->
+        <section class="countdown-container">
+            <h2 class="countdown-title font-playfair text-center">Mancano</h2>
+            <div class="countdown-box">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Giorni</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Ore</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minuti</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Secondi</span>
+                </div>
             </div>
-            <div class="detail-card">
-                <h3>🍾 Ricevimento</h3>
-                <p>Villa Bellini<br>Dopo la cerimonia</p>
+        </section>
+
+        <!-- Details -->
+        <section class="details-section">
+            <h2 class="section-title font-playfair">I dettagli della giornata</h2>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon">⛪</div>
+                    <h3 class="detail-title font-playfair">Cerimonia</h3>
+                    <p class="detail-text">Chiesa di San Pietro<br>Via Roma, 123<br>Ore 15:00</p>
+                    <p class="mt-4 text-gray-600">La cerimonia religiosa sarà celebrata da Don Mario Rossi.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🍾</div>
+                    <h3 class="detail-title font-playfair">Ricevimento</h3>
+                    <p class="detail-text">Villa Bellini<br>Via dei Fiori, 45<br>Dopo la cerimonia</p>
+                    <p class="mt-4 text-gray-600">Cena, balli e festeggiamenti in una splendida villa rinascimentale.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon">🎁</div>
+                    <h3 class="detail-title font-playfair">Lista Nozze</h3>
+                    <p class="detail-text">Il vostore presenza è il regalo più bello.<br>Se desiderate farci un dono, preferiamo un contributo per il nostro viaggio di nozze.</p>
+                    <p class="mt-4 text-gray-600">Contattate i nostri testimoni per informazioni.</p>
+                </div>
             </div>
-        </div>
-        
-        <p style="font-style: italic; margin-top: 40px;">
-            "Due cuori, un destino"
-        </p>
+        </section>
+
+        <!-- RSVP -->
+        <section class="rsvp-section">
+            <h2 class="section-title font-playfair text-white">Conferma la tua presenza</h2>
+            <p class="text-center text-xl opacity-90 max-w-2xl mx-auto">Per favore, conferma la tua presenza entro il 30 Maggio 2025</p>
+            <form class="rsvp-form" id="rsvpForm">
+                <div class="form-group">
+                    <label class="form-label" for="name">Nome e Cognome</label>
+                    <input type="text" id="name" class="form-input" placeholder="Inserisci il tuo nome" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="tua@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="guests">Numero di ospiti</label>
+                    <input type="number" id="guests" class="form-input" placeholder="1" min="1" max="10" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="message">Messaggio (opzionale)</label>
+                    <textarea id="message" class="form-input" rows="4" placeholder="Scrivi un messaggio per gli sposi..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Conferma presenza</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">Con amore, Sara & Stefano</p>
+            <div class="footer-hearts">❤️ ❤️ ❤️</div>
+            <p class="text-gray-400">15 Giugno 2025 - Villa Bellini</p>
+            <p class="text-gray-400 mt-4">Per informazioni: +39 333 123 4567 - info@saraestefano.it</p>
+        </footer>
     </div>
 
     <script>
+        // DOM Elements
         const splash = document.getElementById('splash');
         const mainContent = document.getElementById('mainContent');
+        const unlockBar = document.getElementById('unlockBar');
+        const rsvpForm = document.getElementById('rsvpForm');
 
-        // Rileva trascinamento (swipe)
+        // Swipe detection
         let startY, startX;
-
         splash.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
             startX = e.touches[0].clientX;
@@ -196,14 +512,15 @@
             const diffY = startY - endY;
             const diffX = Math.abs(startX - endX);
 
-            // Swipe verso l'alto (come sblocco smartphone)
+            // Swipe up (like smartphone unlock)
             if (diffY > 50 && diffX < 100) {
                 revealContent();
             }
         });
 
-        // Click/Tap per aprire
+        // Click/Tap to open
         splash.addEventListener('click', revealContent);
+        unlockBar.addEventListener('click', revealContent);
 
         function revealContent() {
             splash.classList.add('hidden');
@@ -211,6 +528,58 @@
                 mainContent.classList.add('visible');
             }, 500);
         }
+
+        // Countdown timer
+        function updateCountdown() {
+            const weddingDate = new Date('June 15, 2025 15:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // RSVP Form submission
+        rsvpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const guests = document.getElementById('guests').value;
+            
+            // Simple confirmation
+            alert(`Grazie ${name}! La tua presenza per ${guests} ospiti è stata confermata. Ti aspettiamo!`);
+            
+            // Reset form
+            rsvpForm.reset();
+        });
+
+        // Optional: Add parallax effect on scroll
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
     </script>
 </body>
 </html>
