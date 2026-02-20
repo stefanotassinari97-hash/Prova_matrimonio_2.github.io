@@ -41,9 +41,9 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;/* NUOVO: Transizione fluida per quando rilasciamo il tocco */
+            z-index: 9999;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
-            touch-action: none; /* Impedisce lo scroll della pagina mentre trasciniamo la tendina */
+            touch-action: none;
         }
 
         .splash-screen.hidden {
@@ -106,12 +106,6 @@
             animation: float 2s infinite ease-in-out;
         }
 
-        .swipe-hint {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(10px); }
@@ -133,7 +127,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #fdf6f0 0%, #f8e9d9 100%);
+            background: linear-gradient(135deg, #f0f7f0 0%, #d4ead4 100%);
             position: relative;
             overflow: hidden;
         }
@@ -146,14 +140,14 @@
 
         .hero-title {
             font-size: 5rem;
-            color: #8b4513;
+            color: #2d6a2d;
             margin-bottom: 1rem;
             line-height: 1.1;
         }
 
         .hero-date {
             font-size: 2rem;
-            color: #b8860b;
+            color: #4a8c4a;
             margin-bottom: 3rem;
         }
 
@@ -176,60 +170,17 @@
             transform: rotate(15deg);
         }
 
-        /* Countdown */
-        .countdown-container {
-            background: #8b4513;
-            color: white;
-            padding: 4rem 2rem;
-        }
-
-        .countdown-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .countdown-box {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            min-width: 150px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .countdown-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         /* Details section */
         .details-section {
             padding: 5rem 2rem;
-            background: #fdf6f0;
+            background: #f0f7f0;
         }
 
         .section-title {
             font-size: 3rem;
             text-align: center;
             margin-bottom: 3rem;
-            color: #8b4513;
+            color: #2d6a2d;
         }
 
         .details-grid {
@@ -247,7 +198,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(139, 69, 19, 0.1);
+            border: 1px solid rgba(45, 106, 45, 0.1);
         }
 
         .detail-card:hover {
@@ -255,15 +206,21 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
         }
 
+        a.detail-card {
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+        }
+
         .detail-icon {
             font-size: 3rem;
-            color: #b8860b;
+            color: #4a8c4a;
             margin-bottom: 1.5rem;
         }
 
         .detail-title {
             font-size: 1.8rem;
-            color: #8b4513;
+            color: #2d6a2d;
             margin-bottom: 1rem;
         }
 
@@ -273,65 +230,7 @@
             line-height: 1.6;
         }
 
-        /* RSVP section */
-        .rsvp-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, #8b4513 0%, #b8860b 100%);
-            color: white;
-        }
-
-        .rsvp-form {
-            max-width: 600px;
-            margin: 3rem auto 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1rem;
-        }
-
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .btn-submit {
-            background: white;
-            color: #8b4513;
-            border: none;
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: block;
-            margin: 2rem auto 0;
-        }
-
-        .btn-submit:hover {
-            background: #f8e9d9;
-            transform: scale(1.05);
-        }
+        
 
         /* Footer */
         .footer {
@@ -366,13 +265,6 @@
             .hero-date {
                 font-size: 1.5rem;
             }
-            .countdown-item {
-                min-width: 120px;
-                padding: 1.5rem;
-            }
-            .countdown-number {
-                font-size: 2.5rem;
-            }
             .section-title {
                 font-size: 2.2rem;
             }
@@ -393,7 +285,6 @@
                     <span class="unlock-text">Scorri o clicca per scoprire</span>
                     <span class="arrow-icon">➜</span>
                 </div>
-            <!--  <p class="swipe-hint">(Trascina verso l'alto come su uno smartphone)</p>  -->
             </div>
         </div>
     </div>
@@ -411,78 +302,32 @@
             </div>
         </section>
 
-        <!-- Countdown -->
-        <section class="countdown-container">
-            <h2 class="countdown-title font-playfair text-center">Mancano</h2>
-            <div class="countdown-box">
-                <div class="countdown-item">
-                    <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Giorni</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Ore</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Minuti</span>
-                </div>
-                <div class="countdown-item">
-                    <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Secondi</span>
-                </div>
-            </div>
-        </section>
-
         <!-- Details -->
         <section class="details-section">
             <h2 class="section-title font-playfair">I dettagli della giornata</h2>
             <div class="details-grid">
-                <div class="detail-card">
+                <a class="detail-card" href="https://maps.app.goo.gl/h35iSmGDXWYMYuZQA" target="_blank" rel="noopener">
                     <div class="detail-icon">⛪</div>
                     <h3 class="detail-title font-playfair">Cerimonia</h3>
                     <p class="detail-text">Chiesa di San Pietro<br>Via Roma, 123<br>Ore 15:00</p>
                     <p class="mt-4 text-gray-600">La cerimonia religiosa sarà celebrata da Don Mario Rossi.</p>
-                </div>
-                <div class="detail-card">
+                </a>
+                <a class="detail-card" href="https://maps.app.goo.gl/FYA6hYuA2w6UgFcr7" target="_blank" rel="noopener">
                     <div class="detail-icon">🍾</div>
                     <h3 class="detail-title font-playfair">Ricevimento</h3>
                     <p class="detail-text">Villa Bellini<br>Via dei Fiori, 45<br>Dopo la cerimonia</p>
                     <p class="mt-4 text-gray-600">Cena, balli e festeggiamenti in una splendida villa rinascimentale.</p>
-                </div>
-                <div class="detail-card">
+                </a>
+                <a class="detail-card" href="https://stefanotassinari97-hash.github.io/Prova_matrimonio_2.github.io/" target="_blank" rel="noopener">
                     <div class="detail-icon">🎁</div>
                     <h3 class="detail-title font-playfair">Lista Nozze</h3>
                     <p class="detail-text">La vostra presenza è il regalo più bello.<br>Se desiderate farci un dono, clicca qui per passare alla lista di noz.</p>
                     <p class="mt-4 text-gray-600">Contattate i nostri testimoni per informazioni.</p>
-                </div>
+                </a>
             </div>
         </section>
 
-        <!-- RSVP -->
-        <section class="rsvp-section">
-            <h2 class="section-title font-playfair text-white">Conferma la tua presenza</h2>
-            <p class="text-center text-xl opacity-90 max-w-2xl mx-auto">Per favore, conferma la tua presenza entro il 30 Maggio 2025</p>
-            <form class="rsvp-form" id="rsvpForm">
-                <div class="form-group">
-                    <label class="form-label" for="name">Nome e Cognome</label>
-                    <input type="text" id="name" class="form-input" placeholder="Inserisci il tuo nome" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
-                    <input type="email" id="email" class="form-input" placeholder="tua@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="guests">Numero di ospiti</label>
-                    <input type="number" id="guests" class="form-input" placeholder="1" min="1" max="10" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="message">Messaggio (opzionale)</label>
-                    <textarea id="message" class="form-input" rows="4" placeholder="Scrivi un messaggio per gli sposi..."></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Conferma presenza</button>
-            </form>
-        </section>
+
 
         <!-- Footer -->
         <footer class="footer">
@@ -492,55 +337,46 @@
             <p class="text-gray-400 mt-4">Per informazioni: +39 333 123 4567 - info@saraestefano.it</p>
         </footer>
     </div>
-<script>
+
+    <script>
         const splash = document.getElementById('splash');
         const mainContent = document.getElementById('mainContent');
-        const rsvpForm = document.getElementById('rsvpForm');
+        
 
-        /* LOGICA DI TRASCINAMENTO (TOUCH & MOUSE) */
         let startY = 0;
         let isDragging = false;
 
-        // Inizio tocco
         const startDrag = (e) => {
             startY = e.touches ? e.touches[0].clientY : e.clientY;
             isDragging = true;
-            splash.style.transition = 'none'; // Rimuove delay mentre trasciniamo
+            splash.style.transition = 'none';
         };
 
-        // Movimento
         const doDrag = (e) => {
             if (!isDragging) return;
             const currentY = e.touches ? e.touches[0].clientY : e.clientY;
             const diffY = startY - currentY;
-
-            if (diffY > 0) { // Solo se trascina verso l'alto
+            if (diffY > 0) {
                 splash.style.transform = `translateY(-${diffY}px)`;
                 splash.style.opacity = 1 - (diffY / window.innerHeight);
             }
         };
 
-        // Fine tocco
         const stopDrag = (e) => {
             if (!isDragging) return;
             isDragging = false;
-            
             const currentY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
             const diffY = startY - currentY;
-            const threshold = window.innerHeight * 0.20; // Bastano il 20% di swipe per sbloccare
-
+            const threshold = window.innerHeight * 0.20;
             splash.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-
             if (diffY > threshold) {
                 revealContent();
             } else {
-                // Torna giù se lo swipe è troppo corto
                 splash.style.transform = `translateY(0)`;
                 splash.style.opacity = '1';
             }
         };
 
-        // Event Listeners per Touch (Smartphone) e Mouse (PC)
         splash.addEventListener('touchstart', startDrag);
         splash.addEventListener('touchmove', doDrag);
         splash.addEventListener('touchend', stopDrag);
@@ -549,57 +385,15 @@
         window.addEventListener('mouseup', stopDrag);
 
         function revealContent() {
-        // Forza lo spostamento totale verso l'alto e la scomparsa
             splash.style.transform = 'translateY(-100%)';
             splash.style.opacity = '0';
-            
             splash.classList.add('hidden');
             mainContent.classList.add('visible');
         }
-        // Countdown timer
-        function updateCountdown() {
-            const weddingDate = new Date('June 15, 2025 15:00:00').getTime();
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
 
-            if (distance < 0) {
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
-                return;
-            }
+        
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
-
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // RSVP Form submission
-        rsvpForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const guests = document.getElementById('guests').value;
-            
-            // Simple confirmation
-            alert(`Grazie ${name}! La tua presenza per ${guests} ospiti è stata confermata. Ti aspettiamo!`);
-            
-            // Reset form
-            rsvpForm.reset();
-        });
-
-        // Optional: Add parallax effect on scroll
+        // Parallax effect on scroll
         window.addEventListener('scroll', function() {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
