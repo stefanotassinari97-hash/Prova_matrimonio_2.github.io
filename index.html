@@ -36,7 +36,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                        url('https://github.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/blob/main/images/foto_grande.jpg?raw=true') center/cover no-repeat;
+                        url('https://raw.githubusercontent.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/main/images/foto_grande.jpg?v=2') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -88,11 +88,17 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            user-select: none;
         }
 
         .unlock-bar:hover {
             background: rgba(255, 255, 255, 0.25);
             transform: translateY(-5px);
+        }
+
+        .unlock-bar:active {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.35);
         }
 
         .unlock-text {
@@ -230,8 +236,6 @@
             line-height: 1.6;
         }
 
-        
-
         /* Footer */
         .footer {
             background: #333;
@@ -293,14 +297,8 @@
     <div class="main-content" id="mainContent">
         <!-- Hero Section -->
         <section class="hero">
-            <!-- url('https://github.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/blob/main/images/img_1.jpg?raw=true') center/cover no-repeat
-            url('https://github.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/blob/main/images/img_5.jpg?raw=true') center/cover no-repeat
-            url('https://github.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/blob/main/images/img_5.jpg?raw=true') center/cover no-repeat -->
-            <img src="https://github.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/blob/main/images/img_1.jpg?raw=true" alt="Floral" class="hero-floral hero-floral-1">
-            <img src="https://github.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/blob/main/images/img_5.jpg?raw=true" alt="Floral" class="hero-floral hero-floral-2">
-            
-            <!-- <img src="https://cdn-icons-png.flaticon.com/512/1998/1998678.png" alt="Floral" class="hero-floral hero-floral-1">
-            <img src="https://cdn-icons-png.flaticon.com/512/1998/1998678.png" alt="Floral" class="hero-floral hero-floral-2"> -->
+            <img src="https://raw.githubusercontent.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/main/images/img_1.jpg?v=2" alt="Floral" class="hero-floral hero-floral-1">
+            <img src="https://raw.githubusercontent.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/main/images/img_5.jpg?v=2" alt="Floral" class="hero-floral hero-floral-2">
             <div class="hero-content">
                 <h1 class="hero-title font-dancing">Sara & Stefano</h1>
                 <p class="hero-date font-playfair">15 Giugno 2025</p>
@@ -327,13 +325,11 @@
                 <a class="detail-card" href="https://stefanotassinari97-hash.github.io/Prova_matrimonio_2.github.io/" target="_blank" rel="noopener">
                     <div class="detail-icon">🎁</div>
                     <h3 class="detail-title font-playfair">Lista Nozze</h3>
-                    <p class="detail-text">La vostra presenza è il regalo più bello.<br>Se desiderate farci un dono, clicca qui per passare alla lista di noz.</p>
+                    <p class="detail-text">La vostra presenza è il regalo più bello.<br>Se desiderate farci un dono, clicca qui per passare alla lista di nozze.</p>
                     <p class="mt-4 text-gray-600">Contattate i nostri testimoni per informazioni.</p>
                 </a>
             </div>
         </section>
-
-
 
         <!-- Footer -->
         <footer class="footer">
@@ -347,14 +343,24 @@
     <script>
         const splash = document.getElementById('splash');
         const mainContent = document.getElementById('mainContent');
-        
+        const unlockBar = document.getElementById('unlockBar');
 
+        // ── CLICK sul pulsante ──────────────────────────────────────────────
+        unlockBar.addEventListener('click', function (e) {
+            // Evita che il click venga interpretato anche come fine-drag
+            if (wasDragging) return;
+            revealContent();
+        });
+
+        // ── DRAG / SWIPE ────────────────────────────────────────────────────
         let startY = 0;
         let isDragging = false;
+        let wasDragging = false;   // flag per distinguere click da drag
 
         const startDrag = (e) => {
             startY = e.touches ? e.touches[0].clientY : e.clientY;
             isDragging = true;
+            wasDragging = false;
             splash.style.transition = 'none';
         };
 
@@ -362,6 +368,9 @@
             if (!isDragging) return;
             const currentY = e.touches ? e.touches[0].clientY : e.clientY;
             const diffY = startY - currentY;
+            if (diffY > 5) {
+                wasDragging = true;   // movimento significativo → è un drag, non un click
+            }
             if (diffY > 0) {
                 splash.style.transform = `translateY(-${diffY}px)`;
                 splash.style.opacity = 1 - (diffY / window.innerHeight);
@@ -378,29 +387,32 @@
             if (diffY > threshold) {
                 revealContent();
             } else {
-                splash.style.transform = `translateY(0)`;
+                splash.style.transform = 'translateY(0)';
                 splash.style.opacity = '1';
             }
         };
 
+        // Touch events (mobile)
         splash.addEventListener('touchstart', startDrag);
         splash.addEventListener('touchmove', doDrag);
         splash.addEventListener('touchend', stopDrag);
+
+        // Mouse events (desktop – drag sulla splash intera)
         splash.addEventListener('mousedown', startDrag);
         window.addEventListener('mousemove', doDrag);
         window.addEventListener('mouseup', stopDrag);
 
+        // ── Funzione principale ─────────────────────────────────────────────
         function revealContent() {
+            splash.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
             splash.style.transform = 'translateY(-100%)';
             splash.style.opacity = '0';
-            splash.classList.add('hidden');
+            setTimeout(() => splash.classList.add('hidden'), 500);
             mainContent.classList.add('visible');
         }
 
-        
-
-        // Parallax effect on scroll
-        window.addEventListener('scroll', function() {
+        // ── Parallax on scroll ──────────────────────────────────────────────
+        window.addEventListener('scroll', function () {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
             if (hero) {
