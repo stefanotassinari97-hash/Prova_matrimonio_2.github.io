@@ -549,6 +549,10 @@
         window.addEventListener('mouseup', stopDrag);
 
         function revealContent() {
+        // Forza lo spostamento totale verso l'alto e la scomparsa
+            splash.style.transform = 'translateY(-100%)';
+            splash.style.opacity = '0';
+            
             splash.classList.add('hidden');
             mainContent.classList.add('visible');
         }
