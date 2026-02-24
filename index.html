@@ -703,6 +703,8 @@ function renderRoadmap() {
 }
 
 // ── MODALS ─────────────────────────────────────────────────────
+let totalBeforeGift = 0; // salviamo il totale prima del regalo per rilevare nuovi unlock
+
 window.openGiftModal = function() {
   document.getElementById('amountInput').value = '';
   document.querySelectorAll('.suggestion-btn').forEach(b => b.classList.remove('active'));
@@ -711,6 +713,21 @@ window.openGiftModal = function() {
 
 window.closeModal = function(id) {
   document.getElementById(id).classList.remove('active');
+
+  // Quando chiudo la modal IBAN, aggiorno la roadmap e mostro eventuali unlock
+  if (id === 'ibanModal') {
+    renderRoadmap();
+    const newlyUnlocked = LEVELS.filter(l => l.amount <= currentTotal && l.amount > totalBeforeGift);
+    if (newlyUnlocked.length > 0) {
+      setTimeout(() => {
+        newlyUnlocked.forEach(l => {
+          const node = document.getElementById(`milestone-${l.id}`);
+          if (node) node.classList.add('just-unlocked');
+        });
+        launchConfetti();
+      }, 300);
+    }
+  }
 };
 
 window.setSuggestion = function(val) {
@@ -735,14 +752,18 @@ window.confirmGift = async function() {
   setSync('loading', 'salvataggio in corso…');
 
   try {
-    // runTransaction aggiunge il valore atomicamente — sicuro anche con più utenti contemporanei
+    totalBeforeGift = currentTotal; // snapshot prima della transazione
+
     await runTransaction(totalRef, (current) => {
       return (current || 0) + amount;
     });
 
+    // Aggiorna subito currentTotal localmente senza aspettare Firebase
+    currentTotal = totalBeforeGift + amount;
+
     closeModal('giftModal');
 
-    document.getElementById('ibanDisplay').textContent     = CONFIG.iban;
+    document.getElementById('ibanDisplay').textContent      = CONFIG.iban;
     document.getElementById('ibanBeneficiario').textContent = CONFIG.beneficiario;
     document.getElementById('ibanCausale').textContent      = CONFIG.causale;
     document.getElementById('ibanModal').classList.add('active');
