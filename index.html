@@ -1,426 +1,799 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Nostro Matrimonio - Sara & Stefano</title>
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista Nozze — Il Nostro Viaggio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f7f2ea;
+    --warm-white: #fdfaf5;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --gold-dark: #a07840;
+    --rose: #c4837a;
+    --charcoal: #2c2825;
+    --warm-gray: #9a8f84;
+    --border: rgba(201,169,110,0.25);
+    --locked-bg: #eee8de;
+    --locked-text: #c8bdb2;
+  }
 
-        body {
-            font-family: 'Open Sans', sans-serif;
-            overflow-x: hidden;
-        }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-        .font-dancing {
-            font-family: 'Dancing Script', cursive;
-        }
+  body {
+    background-color: var(--cream);
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-        .font-playfair {
-            font-family: 'Playfair Display', serif;
-        }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 30%, rgba(196,131,122,0.07) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 70%, rgba(201,169,110,0.09) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
 
-        /* Splash screen */
-        .splash-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                        url('https://raw.githubusercontent.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/main/images/foto_grande.jpg?v=2') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
-            touch-action: none;
-        }
+  .top-border {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--rose), var(--gold), transparent);
+    position: relative; z-index: 1;
+  }
 
-        .splash-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-30px);
-        }
+  header {
+    text-align: center;
+    padding: 56px 20px 32px;
+    position: relative; z-index: 1;
+  }
 
-        .splash-content {
-            text-align: center;
-            color: white;
-            padding: 2rem;
-            max-width: 700px;
-        }
+  .header-ornament {
+    font-size: 18px; color: var(--gold);
+    letter-spacing: 14px; margin-bottom: 18px; opacity: 0.65;
+  }
 
-        .splash-title {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-        }
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 300; letter-spacing: 0.04em; line-height: 1.05;
+  }
 
-        .splash-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
+  header h1 em { font-style: italic; color: var(--rose); }
 
-        .unlock-container {
-            margin-top: 2rem;
-        }
+  .header-date {
+    font-size: 0.7rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--warm-gray); margin-top: 14px;
+  }
 
-        .unlock-bar {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 60px;
-            padding: 18px 45px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            user-select: none;
-        }
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic; color: var(--warm-gray);
+    margin-top: 18px; max-width: 460px; margin-inline: auto; line-height: 1.7;
+  }
 
-        .unlock-bar:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
-        }
+  /* STATUS INDICATOR */
+  .sync-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 14px;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--warm-gray);
+  }
 
-        .unlock-bar:active {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.35);
-        }
+  .sync-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--locked-bg);
+    transition: background 0.4s;
+  }
 
-        .unlock-text {
-            font-size: 1.3rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
+  .sync-dot.online  { background: #7cb87c; }
+  .sync-dot.loading { background: var(--gold); animation: blink 1s infinite; }
+  .sync-dot.error   { background: var(--rose); }
 
-        .arrow-icon {
-            font-size: 1.8rem;
-            animation: float 2s infinite ease-in-out;
-        }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
-        }
+  .gift-btn-wrap {
+    text-align: center; margin: 28px 0 0;
+    position: relative; z-index: 1;
+  }
 
-        /* Main content */
-        .main-content {
-            opacity: 0;
-            transition: opacity 1s ease;
-        }
+  .gift-btn {
+    display: inline-block; padding: 14px 48px;
+    background: var(--charcoal); color: var(--cream);
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase;
+    border: none; cursor: pointer; border-radius: 1px;
+    transition: background 0.3s, letter-spacing 0.3s;
+    position: relative; overflow: hidden;
+  }
 
-        .main-content.visible {
-            opacity: 1;
-        }
+  .gift-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent);
+    transform: translateX(-100%); transition: transform 0.5s;
+  }
 
-        /* Hero section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f0f7f0 0%, #d4ead4 100%);
-            position: relative;
-            overflow: hidden;
-        }
+  .gift-btn:hover::before { transform: translateX(100%); }
+  .gift-btn:hover { background: var(--gold-dark); letter-spacing: 0.27em; }
+  .gift-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            padding: 2rem;
-        }
+  /* ROADMAP */
+  .roadmap-outer {
+    position: relative; z-index: 1;
+    overflow-x: auto; overflow-y: visible;
+    padding: 0 0 30px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-light) transparent;
+  }
 
-        .hero-title {
-            font-size: 5rem;
-            color: #2d6a2d;
-            margin-bottom: 1rem;
-            line-height: 1.1;
-        }
+  .roadmap-outer::-webkit-scrollbar { height: 4px; }
+  .roadmap-outer::-webkit-scrollbar-track { background: transparent; }
+  .roadmap-outer::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 4px; }
 
-        .hero-date {
-            font-size: 2rem;
-            color: #4a8c4a;
-            margin-bottom: 3rem;
-        }
+  .roadmap-inner {
+    display: flex;
+    align-items: center;
+    min-width: max-content;
+    padding: 140px 80px 140px;
+    position: relative;
+  }
 
-        .hero-floral {
-            position: absolute;
-            width: 25%;
-            /* max-width: 400px; */
-            min-width: 80px;
-            opacity: 0.7;
-            z-index: 1;
-        }
+  .connector {
+    width: 90px; height: 2px;
+    background: var(--locked-bg);
+    flex-shrink: 0; position: relative;
+    transition: background 0.6s;
+  }
 
-        .hero-floral-1 {
-            top: 10%;
-            left: 5%;
-            transform: rotate(-15deg);
-        }
+  .connector.done {
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+  }
 
-        .hero-floral-2 {
-            bottom: 10%;
-            right: 5%;
-            transform: rotate(15deg);
-        }
+  .connector.partial::before {
+    content: '';
+    position: absolute; left: 0; top: 0;
+    height: 100%; width: var(--fill, 0%);
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+    transition: width 0.8s ease;
+  }
 
-        /* Details section */
-        .details-section {
-            padding: 5rem 2rem;
-            background: #f0f7f0;
-        }
+  .milestone {
+    display: flex; flex-direction: column;
+    align-items: center;
+    position: relative; flex-shrink: 0;
+  }
 
-        .section-title {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #2d6a2d;
-        }
+  .milestone-circle {
+    width: 96px; height: 96px; border-radius: 50%;
+    border: 2px solid var(--locked-bg);
+    background: var(--warm-white);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+    box-shadow: 0 2px 14px rgba(44,40,37,0.05);
+    z-index: 2;
+  }
 
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+  .milestone.unlocked .milestone-circle {
+    border-color: var(--gold);
+    background: linear-gradient(145deg, #fffcf5, var(--warm-white));
+    box-shadow: 0 8px 32px rgba(201,169,110,0.25), 0 0 0 7px rgba(201,169,110,0.08);
+  }
 
-        .detail-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(45, 106, 45, 0.1);
-        }
+  .milestone.next .milestone-circle {
+    border-color: var(--rose); border-style: dashed;
+    box-shadow: 0 4px 22px rgba(196,131,122,0.18), 0 0 0 5px rgba(196,131,122,0.07);
+    animation: pulse-next 2.8s ease-in-out infinite;
+  }
 
-        .detail-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-        }
+  .milestone.locked .milestone-circle { opacity: 0.45; }
 
-        a.detail-card {
-            text-decoration: none;
-            cursor: pointer;
-            display: block;
-        }
+  @keyframes pulse-next {
+    0%,100% { box-shadow: 0 4px 22px rgba(196,131,122,0.18), 0 0 0 5px rgba(196,131,122,0.07); }
+    50%      { box-shadow: 0 4px 30px rgba(196,131,122,0.32), 0 0 0 12px rgba(196,131,122,0.04); }
+  }
 
-        .detail-icon {
-            font-size: 3rem;
-            color: #4a8c4a;
-            margin-bottom: 1.5rem;
-        }
+  .milestone-check {
+    position: absolute; top: -3px; right: -3px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--gold); color: white; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transform: scale(0);
+    transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
+    box-shadow: 0 2px 8px rgba(160,120,64,0.35);
+  }
 
-        .detail-title {
-            font-size: 1.8rem;
-            color: #2d6a2d;
-            margin-bottom: 1rem;
-        }
+  .milestone.unlocked .milestone-check { opacity: 1; transform: scale(1); }
 
-        .detail-text {
-            font-size: 1.2rem;
-            color: #555;
-            line-height: 1.6;
-        }
+  .milestone-emoji {
+    font-size: 2rem; line-height: 1; user-select: none;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
 
-        /* Footer */
-        .footer {
-            background: #333;
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
+  .milestone.locked .milestone-emoji { filter: grayscale(1); font-size: 1.3rem; }
+  .milestone.unlocked .milestone-circle:hover .milestone-emoji { transform: scale(1.18) rotate(-8deg); }
 
-        .footer-text {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
+  .milestone-num {
+    font-size: 0.54rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--warm-gray); margin-top: 5px;
+  }
 
-        .footer-hearts {
-            color: #ff6b6b;
-            font-size: 1.5rem;
-            margin: 1rem 0;
-        }
+  .milestone.locked .milestone-num { color: var(--locked-text); }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .splash-title {
-                font-size: 2.5rem;
-            }
-            .splash-subtitle {
-                font-size: 1.2rem;
-            }
-            .hero-title {
-                font-size: 3rem;
-            }
-            .hero-date {
-                font-size: 1.5rem;
-            }
-            .section-title {
-                font-size: 2.2rem;
-            }
-            .detail-card {
-                padding: 2rem;
-            }
-        }
-    </style>
+  .milestone-stem { width: 1px; background: var(--border); flex-shrink: 0; }
+
+  .milestone-label { width: 130px; text-align: center; flex-shrink: 0; }
+
+  .milestone-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; font-weight: 400;
+    color: var(--charcoal); line-height: 1.25; margin-bottom: 4px;
+  }
+
+  .milestone.locked .milestone-name { color: var(--locked-text); }
+
+  .milestone-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.72rem; font-style: italic;
+    color: var(--warm-gray); line-height: 1.4;
+  }
+
+  .milestone.locked .milestone-desc { opacity: 0; }
+
+  .scroll-hint {
+    text-align: center; margin: 6px 0 50px;
+    font-size: 0.66rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--warm-gray); opacity: 0;
+    position: relative; z-index: 1;
+    animation: show-hint 4s ease 0.5s forwards;
+  }
+
+  @keyframes show-hint {
+    0%   { opacity: 0; }
+    20%  { opacity: 0.55; }
+    80%  { opacity: 0.55; }
+    100% { opacity: 0; }
+  }
+
+  /* MODALS */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(44,40,37,0.65);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--warm-white);
+    max-width: 460px; width: 100%;
+    border-radius: 2px; padding: 48px 44px 40px;
+    position: relative;
+    transform: translateY(18px) scale(0.97);
+    transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1);
+    border: 1px solid var(--border); text-align: center;
+  }
+
+  .modal::before {
+    content: '';
+    position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .modal-overlay.active .modal { transform: translateY(0) scale(1); }
+
+  .modal-close {
+    position: absolute; top: 14px; right: 18px;
+    background: none; border: none;
+    font-size: 1.4rem; color: var(--warm-gray);
+    cursor: pointer; transition: color 0.2s; line-height: 1;
+  }
+  .modal-close:hover { color: var(--charcoal); }
+
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; margin-bottom: 8px; color: var(--charcoal);
+  }
+
+  .modal-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-style: italic; color: var(--warm-gray); margin-bottom: 28px;
+  }
+
+  .amount-suggestions {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;
+  }
+
+  .suggestion-btn {
+    padding: 8px 18px;
+    border: 1px solid var(--border); background: transparent;
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif; font-size: 0.78rem;
+    cursor: pointer; border-radius: 1px; transition: all 0.2s;
+  }
+
+  .suggestion-btn:hover, .suggestion-btn.active {
+    background: var(--gold); border-color: var(--gold); color: white;
+  }
+
+  .amount-input-wrap { position: relative; margin-bottom: 20px; }
+
+  .amount-currency {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold);
+  }
+
+  .amount-input {
+    width: 100%; padding: 14px 16px 14px 38px;
+    border: 1px solid var(--border); border-radius: 1px;
+    background: transparent;
+    font-family: 'Cormorant Garamond', serif; font-size: 1.9rem;
+    color: var(--charcoal); text-align: center; outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .amount-input:focus { border-color: var(--gold); }
+
+  .confirm-btn {
+    width: 100%; padding: 15px;
+    background: var(--charcoal); color: var(--cream); border: none;
+    font-family: 'Jost', sans-serif; font-size: 0.72rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; border-radius: 1px; transition: background 0.3s;
+  }
+
+  .confirm-btn:hover { background: var(--gold-dark); }
+  .confirm-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  .iban-ornament { font-size: 2.8rem; margin-bottom: 14px; }
+
+  .iban-box {
+    background: var(--cream); border: 1px solid var(--border);
+    border-radius: 2px; padding: 22px 24px; margin-bottom: 14px; text-align: left;
+  }
+
+  .iban-row { margin-bottom: 12px; }
+  .iban-row:last-child { margin-bottom: 0; }
+
+  .iban-label {
+    font-size: 0.62rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--warm-gray); margin-bottom: 3px;
+  }
+
+  .iban-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; color: var(--charcoal); letter-spacing: 0.04em;
+  }
+
+  .copy-btn {
+    width: 100%; padding: 11px;
+    border: 1px solid var(--border); background: transparent; color: var(--warm-gray);
+    font-family: 'Jost', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; border-radius: 1px; transition: all 0.2s; margin-bottom: 12px;
+  }
+
+  .copy-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
+
+  .iban-note {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 0.88rem; color: var(--warm-gray); line-height: 1.6;
+  }
+
+  /* CONFETTI */
+  .confetti-piece {
+    position: fixed; top: -10px;
+    animation: confetti-fall linear forwards;
+    z-index: 200; pointer-events: none; border-radius: 1px;
+  }
+
+  @keyframes confetti-fall {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  @keyframes unlock-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(201,169,110,0.7); }
+    100% { box-shadow: 0 0 0 32px rgba(201,169,110,0); }
+  }
+
+  .just-unlocked .milestone-circle { animation: unlock-ring 1s ease-out; }
+
+  footer {
+    text-align: center; padding: 36px 20px;
+    border-top: 1px solid var(--border);
+    position: relative; z-index: 1;
+  }
+
+  footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.95rem; color: var(--warm-gray);
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 36px 16px 22px; }
+    .modal { padding: 34px 22px 28px; }
+    .milestone-circle { width: 76px; height: 76px; }
+    .milestone-emoji { font-size: 1.6rem; }
+    .connector { width: 55px; }
+    .milestone-label { width: 100px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div class="splash-screen" id="splash">
-        <div class="splash-content">
-            <h1 class="splash-title font-dancing">Sara & Stefano</h1>
-            <p class="splash-subtitle">Vi invitano a celebrare il loro amore</p>
-            <div class="unlock-container">
-                <div class="unlock-bar" id="unlockBar">
-                    <span class="unlock-text">Scorri o clicca per scoprire</span>
-                    <span class="arrow-icon">➜</span>
-                </div>
-            </div>
-        </div>
+
+<div class="top-border"></div>
+
+<header>
+  <div class="header-ornament">✦ ✦ ✦</div>
+  <h1>Marco <em>&</em> Sofia</h1>
+  <div class="header-date">14 Giugno 2025 · Roma</div>
+  <div class="header-subtitle">
+    Ogni dono accende una nuova tappa del nostro viaggio insieme.
+  </div>
+  <div class="sync-status">
+    <div class="sync-dot loading" id="syncDot"></div>
+    <span id="syncLabel">connessione in corso…</span>
+  </div>
+</header>
+
+<div class="gift-btn-wrap">
+  <button class="gift-btn" onclick="openGiftModal()" id="giftBtnMain">✦ Fai un regalo</button>
+</div>
+
+<div class="roadmap-outer" id="roadmapOuter">
+  <div class="roadmap-inner" id="roadmap"></div>
+</div>
+
+<p class="scroll-hint">← scorri per scoprire il percorso →</p>
+
+<footer>
+  <p>"Non è il luogo che rende speciale il viaggio, ma chi lo condivide con te."</p>
+</footer>
+
+<!-- Gift modal -->
+<div class="modal-overlay" id="giftModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('giftModal')">×</button>
+    <div class="modal-title">Il tuo regalo</div>
+    <div class="modal-sub">Scegli l'importo che desideri donare</div>
+    <div class="amount-suggestions">
+      <button class="suggestion-btn" onclick="setSuggestion(50)">€50</button>
+      <button class="suggestion-btn" onclick="setSuggestion(100)">€100</button>
+      <button class="suggestion-btn" onclick="setSuggestion(200)">€200</button>
+      <button class="suggestion-btn" onclick="setSuggestion(500)">€500</button>
     </div>
-
-    <!-- Main Content -->
-    <div class="main-content" id="mainContent">
-        <!-- Hero Section -->
-        <section class="hero">
-            <img src="https://raw.githubusercontent.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/main/images/img_1.jpg?v=2" alt="Floral" class="hero-floral hero-floral-1">
-            <img src="https://raw.githubusercontent.com/stefanotassinari97-hash/Prova_matrimonio_2.github.io/main/images/img_5.jpg?v=2" alt="Floral" class="hero-floral hero-floral-2">
-            <div class="hero-content">
-                <h1 class="hero-title font-dancing">Sara & Stefano</h1>
-                <p class="hero-date font-playfair">15 Giugno 2025</p>
-                <p class="text-xl text-gray-700 max-w-2xl mx-auto mt-6">Con gioia nel cuore, vi invitiamo a condividere con noi il giorno più bello della nostra vita.</p>
-            </div>
-        </section>
-
-        <!-- Details -->
-        <section class="details-section">
-            <h2 class="section-title font-playfair">I dettagli della giornata</h2>
-            <div class="details-grid">
-                <a class="detail-card" href="https://maps.app.goo.gl/h35iSmGDXWYMYuZQA" target="_blank" rel="noopener">
-                    <div class="detail-icon">⛪</div>
-                    <h3 class="detail-title font-playfair">Cerimonia</h3>
-                    <p class="detail-text">Chiesa di San Pietro<br>Via Roma, 123<br>Ore 15:00</p>
-                    <p class="mt-4 text-gray-600">La cerimonia religiosa sarà celebrata da Don Mario Rossi.</p>
-                </a>
-                <a class="detail-card" href="https://maps.app.goo.gl/FYA6hYuA2w6UgFcr7" target="_blank" rel="noopener">
-                    <div class="detail-icon">🍾</div>
-                    <h3 class="detail-title font-playfair">Ricevimento</h3>
-                    <p class="detail-text">Villa Bellini<br>Via dei Fiori, 45<br>Dopo la cerimonia</p>
-                    <p class="mt-4 text-gray-600">Cena, balli e festeggiamenti in una splendida villa rinascimentale.</p>
-                </a>
-                <a class="detail-card" href="https://stefanotassinari97-hash.github.io/Prova_matrimonio_2.github.io/" target="_blank" rel="noopener">
-                    <div class="detail-icon">🎁</div>
-                    <h3 class="detail-title font-playfair">Lista Nozze</h3>
-                    <p class="detail-text">La vostra presenza è il regalo più bello.<br>Se desiderate farci un dono, clicca qui per passare alla lista di nozze.</p>
-                    <p class="mt-4 text-gray-600">Contattate i nostri testimoni per informazioni.</p>
-                </a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p class="footer-text">Con amore, Sara & Stefano</p>
-            <div class="footer-hearts">❤️ ❤️ ❤️</div>
-            <p class="text-gray-400">15 Giugno 2025 - Villa Bellini</p>
-            <p class="text-gray-400 mt-4">Per informazioni: +39 333 123 4567 - info@saraestefano.it</p>
-        </footer>
+    <div class="amount-input-wrap">
+      <span class="amount-currency">€</span>
+      <input type="number" class="amount-input" id="amountInput" placeholder="0" min="1"/>
     </div>
+    <button class="confirm-btn" id="confirmBtn" onclick="confirmGift()">Conferma e scopri come donare →</button>
+  </div>
+</div>
 
-    <script>
-        const splash = document.getElementById('splash');
-        const mainContent = document.getElementById('mainContent');
-        const unlockBar = document.getElementById('unlockBar');
+<!-- IBAN modal -->
+<div class="modal-overlay" id="ibanModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ibanModal')">×</button>
+    <div class="iban-ornament">💌</div>
+    <div class="modal-title">Grazie di cuore</div>
+    <div class="modal-sub">Il tuo gesto illumina un nuovo capitolo della nostra storia.</div>
+    <div class="iban-box">
+      <div class="iban-row">
+        <div class="iban-label">Beneficiario</div>
+        <div class="iban-value" id="ibanBeneficiario"></div>
+      </div>
+      <div class="iban-row">
+        <div class="iban-label">IBAN</div>
+        <div class="iban-value" id="ibanDisplay"></div>
+      </div>
+      <div class="iban-row">
+        <div class="iban-label">Causale suggerita</div>
+        <div class="iban-value" id="ibanCausale"></div>
+      </div>
+    </div>
+    <button class="copy-btn" onclick="copyIBAN()">⧉ Copia IBAN</button>
+    <div class="iban-note">Dopo il bonifico non è necessario comunicarcelo — terremo traccia con immensa gratitudine.</div>
+  </div>
+</div>
 
-        // ── CLICK sul pulsante ──────────────────────────────────────────────
-        unlockBar.addEventListener('click', function (e) {
-            // Evita che il click venga interpretato anche come fine-drag
-            if (wasDragging) return;
-            revealContent();
-        });
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-        // ── DRAG / SWIPE ────────────────────────────────────────────────────
-        let startY = 0;
-        let isDragging = false;
-        let wasDragging = false;   // flag per distinguere click da drag
+// ── CONFIG ────────────────────────────────────────────────────
+const CONFIG = {
+  beneficiario: 'Marco Rossi & Sofia Bianchi',
+  iban: 'IT60 X054 2811 1010 0000 0123 456',
+  causale: 'Lista Nozze Marco & Sofia',
+};
 
-        const startDrag = (e) => {
-            startY = e.touches ? e.touches[0].clientY : e.clientY;
-            isDragging = true;
-            wasDragging = false;
-            splash.style.transition = 'none';
-        };
+const LEVELS = [
+  { id: 1,  emoji: '🥂', name: 'Il Primo Brindisi',        desc: 'Una serata per festeggiare il primo anniversario',   amount: 50   },
+  { id: 2,  emoji: '🌹', name: 'Petali di Rose',            desc: 'Un bouquet di rose rosse per ogni mese insieme',     amount: 120  },
+  { id: 3,  emoji: '🕯️', name: 'Cena a Lume di Candela',   desc: 'Una cena romantica in un ristorante stellato',       amount: 220  },
+  { id: 4,  emoji: '🛁', name: 'Weekend di Relax',          desc: 'Una notte in una spa esclusiva',                     amount: 350  },
+  { id: 5,  emoji: '🌅', name: 'Alba sul Mare',             desc: 'Un fine settimana in un agriturismo costiero',       amount: 500  },
+  { id: 6,  emoji: '🚂', name: 'Viaggio in Treno',          desc: 'Il treno panoramico delle Dolomiti',                 amount: 700  },
+  { id: 7,  emoji: '🏛️', name: 'Weekend a Parigi',          desc: 'Due giorni nella città dell\'amore',                amount: 950  },
+  { id: 8,  emoji: '🌊', name: 'Crociera nel Mediterraneo', desc: 'Una settimana tra le isole greche',                  amount: 1300 },
+  { id: 9,  emoji: '🏔️', name: 'Chalet sulle Alpi',         desc: 'Tre giorni in uno chalet di lusso',                 amount: 1700 },
+  { id: 10, emoji: '🌸', name: 'Giappone in Fiore',         desc: 'I ciliegi in fiore di Kyoto in primavera',           amount: 2300 },
+  { id: 11, emoji: '🏝️', name: 'Maldive',                   desc: 'Sette notti in un resort sull\'acqua',              amount: 3200 },
+  { id: 12, emoji: '✈️', name: 'Luna di Miele dei Sogni',   desc: 'Il grande viaggio — avventura certa',                amount: 5000 },
+];
 
-        const doDrag = (e) => {
-            if (!isDragging) return;
-            const currentY = e.touches ? e.touches[0].clientY : e.clientY;
-            const diffY = startY - currentY;
-            if (diffY > 5) {
-                wasDragging = true;   // movimento significativo → è un drag, non un click
-            }
-            if (diffY > 0) {
-                splash.style.transform = `translateY(-${diffY}px)`;
-                splash.style.opacity = 1 - (diffY / window.innerHeight);
-            }
-        };
+// ── FIREBASE INIT ─────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyATAVj2MZuob6PWF5EfoEClS0gKNxNj4ZY",
+  authDomain: "lista-nozze-8a00c.firebaseapp.com",
+  databaseURL: "https://lista-nozze-8a00c-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "lista-nozze-8a00c",
+  storageBucket: "lista-nozze-8a00c.firebasestorage.app",
+  messagingSenderId: "65025205759",
+  appId: "1:65025205759:web:00484ce9897ab18b87f3ca",
+};
 
-        const stopDrag = (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            const currentY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
-            const diffY = startY - currentY;
-            const threshold = window.innerHeight * 0.20;
-            splash.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-            if (diffY > threshold) {
-                revealContent();
-            } else {
-                splash.style.transform = 'translateY(0)';
-                splash.style.opacity = '1';
-            }
-        };
+const app = initializeApp(firebaseConfig);
+const db  = getDatabase(app);
+const totalRef = ref(db, 'totale');
 
-        // Touch events (mobile)
-        splash.addEventListener('touchstart', startDrag);
-        splash.addEventListener('touchmove', doDrag);
-        splash.addEventListener('touchend', stopDrag);
+// ── STATE ─────────────────────────────────────────────────────
+let currentTotal = 0;
 
-        // Mouse events (desktop – drag sulla splash intera)
-        splash.addEventListener('mousedown', startDrag);
-        window.addEventListener('mousemove', doDrag);
-        window.addEventListener('mouseup', stopDrag);
+// ── SYNC STATUS ───────────────────────────────────────────────
+function setSync(state, text) {
+  const dot   = document.getElementById('syncDot');
+  const label = document.getElementById('syncLabel');
+  dot.className = 'sync-dot ' + state;
+  label.textContent = text;
+}
 
-        // ── Funzione principale ─────────────────────────────────────────────
-        function revealContent() {
-            splash.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
-            splash.style.transform = 'translateY(-100%)';
-            splash.style.opacity = '0';
-            setTimeout(() => splash.classList.add('hidden'), 500);
-            mainContent.classList.add('visible');
-        }
+// ── LISTEN REALTIME ───────────────────────────────────────────
+onValue(totalRef, (snapshot) => {
+  const val = snapshot.val();
+  const newTotal = val !== null ? parseFloat(val) : 0;
 
-        // ── Parallax on scroll ──────────────────────────────────────────────
-        window.addEventListener('scroll', function () {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.1}px)`;
-            }
-        });
-    </script>
+  const oldTotal = currentTotal;
+  currentTotal = newTotal;
+
+  setSync('online', 'sincronizzato');
+  renderRoadmap();
+
+  // Se qualcun altro ha appena sbloccato un livello, mostra i coriandoli
+  const newlyUnlocked = LEVELS.filter(l => l.amount <= newTotal && l.amount > oldTotal);
+  if (newlyUnlocked.length > 0 && oldTotal !== 0) {
+    setTimeout(() => {
+      newlyUnlocked.forEach(l => {
+        const node = document.getElementById(`milestone-${l.id}`);
+        if (node) node.classList.add('just-unlocked');
+      });
+      launchConfetti();
+    }, 350);
+  }
+}, (error) => {
+  setSync('error', 'errore di connessione');
+  console.error(error);
+});
+
+// ── STATUS ─────────────────────────────────────────────────────
+function getStatus(idx) {
+  if (currentTotal >= LEVELS[idx].amount) return 'unlocked';
+  const prev = idx > 0 ? LEVELS[idx-1].amount : 0;
+  if (currentTotal >= prev) return 'next';
+  return 'locked';
+}
+
+function getPartialFill(idx) {
+  const prev  = idx > 0 ? LEVELS[idx-1].amount : 0;
+  const range = LEVELS[idx].amount - prev;
+  return Math.min(100, Math.max(0, ((currentTotal - prev) / range) * 100));
+}
+
+// ── RENDER ROADMAP ─────────────────────────────────────────────
+function renderRoadmap() {
+  const container = document.getElementById('roadmap');
+  container.innerHTML = '';
+
+  const STEM_H   = 52;
+  const LABEL_H  = 80;
+  const CIRCLE_R = 48;
+
+  LEVELS.forEach((level, idx) => {
+    const status  = getStatus(idx);
+    const isAbove = idx % 2 === 0;
+
+    const node = document.createElement('div');
+    node.className = `milestone ${status}`;
+    node.id = `milestone-${level.id}`;
+    node.style.cssText = 'display:flex;flex-direction:column;align-items:center;flex-shrink:0;';
+
+    // LABEL
+    const label = document.createElement('div');
+    label.className = 'milestone-label';
+    const nameEl = document.createElement('div');
+    nameEl.className = 'milestone-name';
+    nameEl.textContent = level.name;
+    const descEl = document.createElement('div');
+    descEl.className = 'milestone-desc';
+    descEl.textContent = level.desc;
+    label.appendChild(nameEl);
+    label.appendChild(descEl);
+
+    // STEM
+    const stem = document.createElement('div');
+    stem.className = 'milestone-stem';
+    stem.style.height = STEM_H + 'px';
+
+    // CIRCLE
+    const circle = document.createElement('div');
+    circle.className = 'milestone-circle';
+    const emoji = document.createElement('span');
+    emoji.className = 'milestone-emoji';
+    emoji.textContent = status === 'locked' ? '🔒' : level.emoji;
+    const numEl = document.createElement('div');
+    numEl.className = 'milestone-num';
+    numEl.textContent = `Cap. ${level.id}`;
+    const check = document.createElement('div');
+    check.className = 'milestone-check';
+    check.textContent = '✓';
+    circle.appendChild(emoji);
+    circle.appendChild(numEl);
+    circle.appendChild(check);
+
+    if (isAbove) {
+      node.appendChild(label);
+      node.appendChild(stem);
+      node.appendChild(circle);
+    } else {
+      node.appendChild(circle);
+      node.appendChild(stem);
+      node.appendChild(label);
+    }
+
+    container.appendChild(node);
+
+    // CONNECTOR
+    if (idx < LEVELS.length - 1) {
+      const nextIsAbove = (idx + 1) % 2 === 0;
+      const curCircleTop  = isAbove     ? LABEL_H + STEM_H + CIRCLE_R : CIRCLE_R;
+      const nextCircleTop = nextIsAbove ? LABEL_H + STEM_H + CIRCLE_R : CIRCLE_R;
+
+      const connWrap = document.createElement('div');
+      connWrap.style.cssText = `
+        display:flex; flex-direction:column; align-items:center; flex-shrink:0;
+        padding-top:${curCircleTop}px;
+      `;
+
+      const conn = document.createElement('div');
+      conn.className = 'connector';
+      if (status === 'unlocked') {
+        conn.classList.add('done');
+      } else if (status === 'next') {
+        conn.classList.add('partial');
+        conn.style.setProperty('--fill', getPartialFill(idx) + '%');
+      }
+
+      connWrap.appendChild(conn);
+      container.appendChild(connWrap);
+    }
+  });
+
+  // Scroll verso il nodo "next"
+  setTimeout(() => {
+    const nextNode = document.querySelector('.milestone.next');
+    if (nextNode) {
+      const outer = document.getElementById('roadmapOuter');
+      outer.scrollTo({ left: nextNode.offsetLeft - outer.clientWidth / 2 + 48, behavior: 'smooth' });
+    }
+  }, 200);
+}
+
+// ── MODALS ─────────────────────────────────────────────────────
+window.openGiftModal = function() {
+  document.getElementById('amountInput').value = '';
+  document.querySelectorAll('.suggestion-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('giftModal').classList.add('active');
+};
+
+window.closeModal = function(id) {
+  document.getElementById(id).classList.remove('active');
+};
+
+window.setSuggestion = function(val) {
+  document.getElementById('amountInput').value = val;
+  document.querySelectorAll('.suggestion-btn').forEach(b =>
+    b.classList.toggle('active', parseInt(b.textContent.replace('€','')) === val)
+  );
+};
+
+window.confirmGift = async function() {
+  const input  = document.getElementById('amountInput');
+  const amount = parseFloat(input.value);
+  if (!amount || amount <= 0) {
+    input.style.borderColor = 'var(--rose)';
+    setTimeout(() => input.style.borderColor = '', 700);
+    return;
+  }
+
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled = true;
+  btn.textContent = 'salvataggio…';
+  setSync('loading', 'salvataggio in corso…');
+
+  try {
+    // runTransaction aggiunge il valore atomicamente — sicuro anche con più utenti contemporanei
+    await runTransaction(totalRef, (current) => {
+      return (current || 0) + amount;
+    });
+
+    closeModal('giftModal');
+
+    document.getElementById('ibanDisplay').textContent     = CONFIG.iban;
+    document.getElementById('ibanBeneficiario').textContent = CONFIG.beneficiario;
+    document.getElementById('ibanCausale').textContent      = CONFIG.causale;
+    document.getElementById('ibanModal').classList.add('active');
+
+  } catch(e) {
+    setSync('error', 'errore salvataggio');
+    alert('Errore nella connessione. Riprova tra un momento.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Conferma e scopri come donare →';
+  }
+};
+
+window.copyIBAN = function() {
+  navigator.clipboard.writeText(CONFIG.iban).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ Copiato!';
+    setTimeout(() => btn.textContent = '⧉ Copia IBAN', 2000);
+  });
+};
+
+// ── CONFETTI ───────────────────────────────────────────────────
+function launchConfetti() {
+  const colors = ['#c9a96e','#c4837a','#e8d5b0','#2c2825','#f7f2ea','#ffffff'];
+  for (let i = 0; i < 70; i++) {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      const size = 5 + Math.random() * 9;
+      p.style.cssText = `
+        left:${Math.random()*100}vw;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        width:${size}px; height:${size}px;
+        animation-duration:${1.8+Math.random()*2.2}s;
+        animation-delay:${Math.random()*0.6}s;
+        border-radius:${Math.random()>0.4?'50%':'1px'};
+      `;
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 5000);
+    }, i * 25);
+  }
+}
+
+// ── CLOSE ON OVERLAY CLICK ─────────────────────────────────────
+document.querySelectorAll('.modal-overlay').forEach(o =>
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('active'); })
+);
+
+// ── INIT ───────────────────────────────────────────────────────
+setSync('loading', 'connessione in corso…');
+renderRoadmap();
+</script>
 </body>
 </html>
