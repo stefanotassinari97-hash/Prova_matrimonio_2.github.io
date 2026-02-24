@@ -4,20 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista Nozze — Il Nostro Viaggio</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #f7f2ea;
-    --warm-white: #fdfaf5;
-    --gold: #c9a96e;
-    --gold-light: #e8d5b0;
-    --gold-dark: #a07840;
-    --rose: #c4837a;
-    --charcoal: #2c2825;
-    --warm-gray: #9a8f84;
-    --border: rgba(201,169,110,0.25);
-    --locked-bg: #eee8de;
-    --locked-text: #c8bdb2;
+    --sage:        #7a9e7e;
+    --sage-dark:   #4a7050;
+    --sage-mid:    #5e8862;
+    --sage-light:  #b8d4bb;
+    --sage-pale:   #e8f2e9;
+    --cream:       #fdf9f0;
+    --cream-dark:  #f0e8d5;
+    --warm-white:  #fefcf7;
+    --wax:         #8b5e4a;
+    --wax-light:   #c4856a;
+    --wax-dark:    #5c3325;
+    --charcoal:    #1c2b1e;
+    --warm-gray:   #7a8f7c;
+    --border:      rgba(122,158,126,0.22);
+    --locked-bg:   #dce8dd;
+    --locked-text: #a8bfaa;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,14 +41,14 @@
     content: '';
     position: fixed; inset: 0;
     background:
-      radial-gradient(ellipse at 10% 30%, rgba(196,131,122,0.07) 0%, transparent 55%),
-      radial-gradient(ellipse at 90% 70%, rgba(201,169,110,0.09) 0%, transparent 55%);
+      radial-gradient(ellipse at 10% 30%, rgba(122,158,126,0.09) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 70%, rgba(74,112,80,0.08) 0%, transparent 55%);
     pointer-events: none; z-index: 0;
   }
 
   .top-border {
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--gold), var(--rose), var(--gold), transparent);
+    background: linear-gradient(90deg, transparent, var(--sage), var(--wax-light), var(--sage), transparent);
     position: relative; z-index: 1;
   }
 
@@ -54,21 +59,23 @@
   }
 
   .header-ornament {
-    font-size: 18px; color: var(--gold);
+    font-size: 18px; color: var(--sage);
     letter-spacing: 14px; margin-bottom: 18px; opacity: 0.65;
   }
 
   header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.6rem, 6vw, 4.4rem);
-    font-weight: 300; letter-spacing: 0.04em; line-height: 1.05;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 700; letter-spacing: 0.02em; line-height: 1.05;
+    color: var(--sage-dark);
   }
 
-  header h1 em { font-style: italic; color: var(--rose); }
+  header h1 em { font-style: italic; color: var(--wax-light); font-weight: 400; }
 
   .header-date {
     font-size: 0.7rem; letter-spacing: 0.3em;
     text-transform: uppercase; color: var(--warm-gray); margin-top: 14px;
+    font-family: 'Cormorant Garamond', serif;
   }
 
   .header-subtitle {
@@ -91,9 +98,9 @@
     transition: background 0.4s;
   }
 
-  .sync-dot.online  { background: #7cb87c; }
-  .sync-dot.loading { background: var(--gold); animation: blink 1s infinite; }
-  .sync-dot.error   { background: var(--rose); }
+  .sync-dot.online  { background: var(--sage-mid); }
+  .sync-dot.loading { background: var(--sage-light); animation: blink 1s infinite; }
+  .sync-dot.error   { background: var(--wax-light); }
 
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
@@ -115,12 +122,12 @@
   .gift-btn::before {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(201,169,110,0.15), transparent);
+    background: linear-gradient(90deg, transparent, rgba(122,158,126,0.2), transparent);
     transform: translateX(-100%); transition: transform 0.5s;
   }
 
   .gift-btn:hover::before { transform: translateX(100%); }
-  .gift-btn:hover { background: var(--gold-dark); letter-spacing: 0.27em; }
+  .gift-btn:hover { background: var(--sage-dark); letter-spacing: 0.27em; }
   .gift-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   /* ROADMAP */
@@ -129,12 +136,12 @@
     overflow-x: auto; overflow-y: visible;
     padding: 0 0 30px;
     scrollbar-width: thin;
-    scrollbar-color: var(--gold-light) transparent;
+    scrollbar-color: var(--sage-light) transparent;
   }
 
   .roadmap-outer::-webkit-scrollbar { height: 4px; }
   .roadmap-outer::-webkit-scrollbar-track { background: transparent; }
-  .roadmap-outer::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 4px; }
+  .roadmap-outer::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 4px; }
 
   .roadmap-inner {
     display: flex;
@@ -152,14 +159,14 @@
   }
 
   .connector.done {
-    background: linear-gradient(90deg, var(--rose), var(--gold));
+    background: linear-gradient(90deg, var(--sage-mid), var(--sage-dark));
   }
 
   .connector.partial::before {
     content: '';
     position: absolute; left: 0; top: 0;
     height: 100%; width: var(--fill, 0%);
-    background: linear-gradient(90deg, var(--rose), var(--gold));
+    background: linear-gradient(90deg, var(--sage-mid), var(--sage-dark));
     transition: width 0.8s ease;
   }
 
@@ -182,32 +189,32 @@
   }
 
   .milestone.unlocked .milestone-circle {
-    border-color: var(--gold);
-    background: linear-gradient(145deg, #fffcf5, var(--warm-white));
-    box-shadow: 0 8px 32px rgba(201,169,110,0.25), 0 0 0 7px rgba(201,169,110,0.08);
+    border-color: var(--sage);
+    background: linear-gradient(145deg, #f5fbf5, var(--warm-white));
+    box-shadow: 0 8px 32px rgba(122,158,126,0.25), 0 0 0 7px rgba(122,158,126,0.08);
   }
 
   .milestone.next .milestone-circle {
-    border-color: var(--rose); border-style: dashed;
-    box-shadow: 0 4px 22px rgba(196,131,122,0.18), 0 0 0 5px rgba(196,131,122,0.07);
+    border-color: var(--wax-light); border-style: dashed;
+    box-shadow: 0 4px 22px rgba(196,133,106,0.2), 0 0 0 5px rgba(196,133,106,0.07);
     animation: pulse-next 2.8s ease-in-out infinite;
   }
 
   .milestone.locked .milestone-circle { opacity: 0.45; }
 
   @keyframes pulse-next {
-    0%,100% { box-shadow: 0 4px 22px rgba(196,131,122,0.18), 0 0 0 5px rgba(196,131,122,0.07); }
-    50%      { box-shadow: 0 4px 30px rgba(196,131,122,0.32), 0 0 0 12px rgba(196,131,122,0.04); }
+    0%,100% { box-shadow: 0 4px 22px rgba(196,133,106,0.2), 0 0 0 5px rgba(196,133,106,0.07); }
+    50%      { box-shadow: 0 4px 30px rgba(196,133,106,0.35), 0 0 0 12px rgba(196,133,106,0.04); }
   }
 
   .milestone-check {
     position: absolute; top: -3px; right: -3px;
     width: 24px; height: 24px; border-radius: 50%;
-    background: var(--gold); color: white; font-size: 11px;
+    background: var(--sage-mid); color: white; font-size: 11px;
     display: flex; align-items: center; justify-content: center;
     opacity: 0; transform: scale(0);
     transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
-    box-shadow: 0 2px 8px rgba(160,120,64,0.35);
+    box-shadow: 0 2px 8px rgba(74,112,80,0.35);
   }
 
   .milestone.unlocked .milestone-check { opacity: 1; transform: scale(1); }
@@ -223,6 +230,7 @@
   .milestone-num {
     font-size: 0.54rem; letter-spacing: 0.18em;
     text-transform: uppercase; color: var(--warm-gray); margin-top: 5px;
+    font-family: 'Cormorant Garamond', serif;
   }
 
   .milestone.locked .milestone-num { color: var(--locked-text); }
@@ -265,7 +273,7 @@
   /* MODALS */
   .modal-overlay {
     position: fixed; inset: 0;
-    background: rgba(44,40,37,0.65);
+    background: rgba(28,43,30,0.65);
     backdrop-filter: blur(8px);
     z-index: 100;
     display: flex; align-items: center; justify-content: center;
@@ -289,7 +297,7 @@
   .modal::before {
     content: '';
     position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    background: linear-gradient(90deg, transparent, var(--sage), transparent);
   }
 
   .modal-overlay.active .modal { transform: translateY(0) scale(1); }
@@ -303,8 +311,8 @@
   .modal-close:hover { color: var(--charcoal); }
 
   .modal-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 300; margin-bottom: 8px; color: var(--charcoal);
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; color: var(--sage-dark);
   }
 
   .modal-sub {
@@ -325,14 +333,14 @@
   }
 
   .suggestion-btn:hover, .suggestion-btn.active {
-    background: var(--gold); border-color: var(--gold); color: white;
+    background: var(--sage-mid); border-color: var(--sage-mid); color: white;
   }
 
   .amount-input-wrap { position: relative; margin-bottom: 20px; }
 
   .amount-currency {
     position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold);
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--sage);
   }
 
   .amount-input {
@@ -344,7 +352,7 @@
     transition: border-color 0.2s;
   }
 
-  .amount-input:focus { border-color: var(--gold); }
+  .amount-input:focus { border-color: var(--sage); }
 
   .confirm-btn {
     width: 100%; padding: 15px;
@@ -354,13 +362,13 @@
     cursor: pointer; border-radius: 1px; transition: background 0.3s;
   }
 
-  .confirm-btn:hover { background: var(--gold-dark); }
+  .confirm-btn:hover { background: var(--sage-dark); }
   .confirm-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
   .iban-ornament { font-size: 2.8rem; margin-bottom: 14px; }
 
   .iban-box {
-    background: var(--cream); border: 1px solid var(--border);
+    background: var(--sage-pale); border: 1px solid var(--border);
     border-radius: 2px; padding: 22px 24px; margin-bottom: 14px; text-align: left;
   }
 
@@ -385,7 +393,7 @@
     cursor: pointer; border-radius: 1px; transition: all 0.2s; margin-bottom: 12px;
   }
 
-  .copy-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
+  .copy-btn:hover { border-color: var(--sage); color: var(--sage-dark); }
 
   .iban-note {
     font-family: 'Cormorant Garamond', serif; font-style: italic;
@@ -405,8 +413,8 @@
   }
 
   @keyframes unlock-ring {
-    0%   { box-shadow: 0 0 0 0 rgba(201,169,110,0.7); }
-    100% { box-shadow: 0 0 0 32px rgba(201,169,110,0); }
+    0%   { box-shadow: 0 0 0 0 rgba(122,158,126,0.7); }
+    100% { box-shadow: 0 0 0 32px rgba(122,158,126,0); }
   }
 
   .just-unlocked .milestone-circle { animation: unlock-ring 1s ease-out; }
@@ -414,12 +422,13 @@
   footer {
     text-align: center; padding: 36px 20px;
     border-top: 1px solid var(--border);
+    background: #1c2b1e;
     position: relative; z-index: 1;
   }
 
   footer p {
     font-family: 'Cormorant Garamond', serif;
-    font-style: italic; font-size: 0.95rem; color: var(--warm-gray);
+    font-style: italic; font-size: 0.95rem; color: rgba(255,255,255,0.45);
   }
 
   @media (max-width: 600px) {
@@ -573,7 +582,6 @@ onValue(totalRef, (snapshot) => {
   setSync('online', 'sincronizzato');
   renderRoadmap();
 
-  // Se qualcun altro ha appena sbloccato un livello, mostra i coriandoli
   const newlyUnlocked = LEVELS.filter(l => l.amount <= newTotal && l.amount > oldTotal);
   if (newlyUnlocked.length > 0 && oldTotal !== 0) {
     setTimeout(() => {
@@ -621,7 +629,6 @@ function renderRoadmap() {
     node.id = `milestone-${level.id}`;
     node.style.cssText = 'display:flex;flex-direction:column;align-items:center;flex-shrink:0;';
 
-    // LABEL
     const label = document.createElement('div');
     label.className = 'milestone-label';
     const nameEl = document.createElement('div');
@@ -633,12 +640,10 @@ function renderRoadmap() {
     label.appendChild(nameEl);
     label.appendChild(descEl);
 
-    // STEM
     const stem = document.createElement('div');
     stem.className = 'milestone-stem';
     stem.style.height = STEM_H + 'px';
 
-    // CIRCLE
     const circle = document.createElement('div');
     circle.className = 'milestone-circle';
     const emoji = document.createElement('span');
@@ -666,11 +671,9 @@ function renderRoadmap() {
 
     container.appendChild(node);
 
-    // CONNECTOR
     if (idx < LEVELS.length - 1) {
       const nextIsAbove = (idx + 1) % 2 === 0;
       const curCircleTop  = isAbove     ? LABEL_H + STEM_H + CIRCLE_R : CIRCLE_R;
-      const nextCircleTop = nextIsAbove ? LABEL_H + STEM_H + CIRCLE_R : CIRCLE_R;
 
       const connWrap = document.createElement('div');
       connWrap.style.cssText = `
@@ -692,7 +695,6 @@ function renderRoadmap() {
     }
   });
 
-  // Scroll verso il nodo "next"
   setTimeout(() => {
     const nextNode = document.querySelector('.milestone.next');
     if (nextNode) {
@@ -703,7 +705,7 @@ function renderRoadmap() {
 }
 
 // ── MODALS ─────────────────────────────────────────────────────
-let totalBeforeGift = 0; // salviamo il totale prima del regalo per rilevare nuovi unlock
+let totalBeforeGift = 0;
 
 window.openGiftModal = function() {
   document.getElementById('amountInput').value = '';
@@ -714,7 +716,6 @@ window.openGiftModal = function() {
 window.closeModal = function(id) {
   document.getElementById(id).classList.remove('active');
 
-  // Quando chiudo la modal IBAN, aggiorno la roadmap e mostro eventuali unlock
   if (id === 'ibanModal') {
     renderRoadmap();
     const newlyUnlocked = LEVELS.filter(l => l.amount <= currentTotal && l.amount > totalBeforeGift);
@@ -741,7 +742,7 @@ window.confirmGift = async function() {
   const input  = document.getElementById('amountInput');
   const amount = parseFloat(input.value);
   if (!amount || amount <= 0) {
-    input.style.borderColor = 'var(--rose)';
+    input.style.borderColor = 'var(--wax-light)';
     setTimeout(() => input.style.borderColor = '', 700);
     return;
   }
@@ -752,13 +753,12 @@ window.confirmGift = async function() {
   setSync('loading', 'salvataggio in corso…');
 
   try {
-    totalBeforeGift = currentTotal; // snapshot prima della transazione
+    totalBeforeGift = currentTotal;
 
     await runTransaction(totalRef, (current) => {
       return (current || 0) + amount;
     });
 
-    // Aggiorna subito currentTotal localmente senza aspettare Firebase
     currentTotal = totalBeforeGift + amount;
 
     closeModal('giftModal');
@@ -787,7 +787,7 @@ window.copyIBAN = function() {
 
 // ── CONFETTI ───────────────────────────────────────────────────
 function launchConfetti() {
-  const colors = ['#c9a96e','#c4837a','#e8d5b0','#2c2825','#f7f2ea','#ffffff'];
+  const colors = ['#7a9e7e','#4a7050','#b8d4bb','#c4856a','#1c2b1e','#fdf9f0','#ffffff'];
   for (let i = 0; i < 70; i++) {
     setTimeout(() => {
       const p = document.createElement('div');
